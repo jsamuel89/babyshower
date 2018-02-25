@@ -1,0 +1,15 @@
+{{outlet}}
+
+<ul>
+  {{#each model.gifts as |gift|}}
+    {{log gift}}
+    <li>{{gift.name}} by {{gift.type}}</li>
+  {{/each}}
+</ul>
+
+ Create a form here to create a new gift item
+
+ {{input type="text" value=model.newgift.name placeholder="Name of the gift item" }}
+ {{input type="text" value=model.newgift.type placeholder="Gift type" }}
+
+  <button {{action "addnewgift" model.newgift}} class="btn btn-sm btn-primary">Save</button>
