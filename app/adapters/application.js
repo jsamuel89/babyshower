@@ -1,8 +1,12 @@
 import DS from 'ember-data';
 import { camelize } from '@ember/string';
+import ENV from "../config/environment";
+
 
 export default DS.JSONAPIAdapter.extend({
-    host: 'http://localhost:3000',
+
+
+    host: ENV.host,
     namespace: 'api',
     // change default naming scheme from dasherize to camelize
     pathForType(type) {
