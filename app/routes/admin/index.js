@@ -12,11 +12,10 @@ export default Route.extend({
   }
   , actions : {
     addnewgift(newgift) {
-      var self = this;
+      // var self = this;
       newgift.save().then( () => {
-        console.log('record saved');
-        this.controller.set('model.newgift','')
-        self.set('newgift','');
+        this.controller.set('model.newgift',this.store.createRecord('gift'))
+        // self.set('newgift','');
       })
     
     }

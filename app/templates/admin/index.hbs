@@ -11,5 +11,6 @@
 
  {{input type="text" value=model.newgift.name placeholder="Name of the gift item" }}
  {{input type="text" value=model.newgift.type placeholder="Gift type" }}
+ {{input type="number" value=model.newgift.maxcount placeholder="Maximum Count to allow" }}
 
   <button {{action "addnewgift" model.newgift}} class="btn btn-sm btn-primary">Save</button>

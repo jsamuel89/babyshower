@@ -1,3 +1,87 @@
 {{outlet}}
+<script>
 
-{{model}}
+  $(document).ready(function() {
+    $('.modal').modal({
+      dismissible: true, // Modal can be dismissed by clicking outside of the modal
+      opacity: .5, // Opacity of modal background
+      inDuration: 300, // Transition in duration
+      outDuration: 200, // Transition out duration
+      startingTop: '4%', // Starting top style attribute
+      endingTop: '10%' // Ending top style attribute
+    });
+  });
+
+</script>
+
+<div class="row container">
+  <div class="col l6 m6 s12 left-align">
+    <h3 class="pink-text">
+      Welcome ..!!
+    </h3>
+  </div>
+  <div class="col l6 m6 s12 left-align" {{action 'triggermodal'}}>
+     <h3 class="pink-text">
+        <a class="waves-effect waves-light modal-trigger" href="#giftchecklist">Pick my gift</a>
+     </h3>
+  </div>
+
+
+    <div id="giftchecklist" class="modal blue" style="width:620px;">
+      <div class="modal-content white-text">
+  {{!-- <div id="modal1" class="modal">
+    <div class="modal-content"> --}}
+      <form class="ui small form">
+        <h4 class="ui app-header dividing header">BABY PRODUCTS CHECKLIST</h4>
+        <br>
+      </form>
+
+
+      <div class="ui three doubling stackable cards link">
+        {{#each model.qi.giftsByGroups as |group|}}
+        <div class="ui card">
+          <div class="content">
+            <div class="ui small feed"></div>
+            <div class="header ui text green">{{group.value}}</div>
+
+            {{#each group.items as |gift|}}
+
+            <div id="ember365" class="view event">
+              <div class="content">
+                <div class="summary">
+                  <label>
+                    <div id="ember378" class="view ui checkbox">
+                      {{input type="checkbox" checked=gift.blockedby disabled=gift.blockedbycontact }}
+                      <label>{{gift.name}}</label>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            {{/each}}
+
+          </div>
+        </div>
+        {{/each}}
+
+        <form class="ui form">
+          <div class="inline field">
+
+            <label>Guest Name</label>
+            <input type="text" name="Guest Name" placeholder="Guest Name" value={{guestname}}>
+
+            <label>Password</label>
+            <input type="password" name="Pass key" placeholder="Pass key" value={{passcode}}>
+
+            <button class="ui button" type="submit" {{action "blockgifts" model guestname passcode}}>Submit</button>
+
+          </div>
+        </form>
+
+      </div> 
+
+
+    </div>
+  </div>
+</div>
