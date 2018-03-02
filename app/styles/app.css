@@ -13,9 +13,11 @@ body {
 }
 
 #giftchecklist {
-  max-width: 100%;
-  max-height: 100%;
-  width: 100%;
+  width: 90%;
   height: 100%;
-  border-radius: 0;
+  border-radius: 5;
+}
+
+.padded{
+  padding:20px;
 }
