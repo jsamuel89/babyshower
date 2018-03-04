@@ -1,11 +1,28 @@
 {{outlet}}
 
-<ul>
-  {{#each model.gifts as |gift|}}
-    {{log gift}}
-    <li>{{gift.name}} by {{gift.type}}</li>
-  {{/each}}
-</ul>
+        <div class="row">
+          {{#each model.qi.giftsByGroups as |group|}}
+
+          <div class="col s12 m6 l4">
+            <div class="card-panel white">
+              <h5 class="pink-text text-accent-3">
+                {{group.value}}
+              </h5>
+              {{#each group.items as |gift|}}
+
+              <h5>{{gift.name}} - {{if gift.blockedbycontact gift.blockedbycontact 'open'}}</h5>
+              {{!-- <p>
+                {{input type="checkbox" checked=gift.blockedby disabled=gift.blockedbycontact id=gift.name}}
+                <label for={{gift.name}}>{{gift.name}}</label>
+              </p> --}}
+
+              {{/each}}
+            </div>
+          </div>
+
+          {{/each}}
+        </div>
+
 
  Create a form here to create a new gift item
 

@@ -102,32 +102,49 @@ export default Route.extend({
     })
 
 	}
-	, guestname : 'test'
 	, setupController: function(controller,model) {
     this._super(controller, model);
-    // controller.set("guestname", "testvalue");
    
   }
   , actions: {
     blockgifts(model, guestname, passcode) {
       // check passcode here
-      console.dir(model.gifts)
-      console.log('blockedby**' + guestname)
+      if(passcode === 'sahitya') {
 
-      var blocked = model.gifts
+        var blocked = model.gifts
+        
+        blocked.forEach(element => {
+          
+          if (element.get('checked') && !element.get('blockedalready')) {  
+          
+            var blockedarr = (element.get('blockedbycontact')) ?  [element.get('blockedbycontact')] : []
+            blockedarr.push(guestname)
 
-      blocked.forEach(element => {
+            var blockedonarr = (element.get('blockedon')) ?  [element.get('blockedon')] : []
+            blockedonarr.push(new Date())
+            
+            
+            element.set('blockedbycontact', blockedarr)
+            element.set('blockedon', blockedonarr)
+            element.set('currentcount',  element.get('currentcount')+1)
+            if(element.get('currentcount') +1 >  element.get('maxcount')) element.set('status', 'blocked')          
+          }
+          
+        });
+        
+        model.gifts.save().then(()=> {
+          $('.modal').modal('close');
+          // location.reload();
+          Materialize.toast('Gifts selected', 4000 , 'green rounded') // 4000 is the duration of the toast
+        })
+        
+      } else {
+        // $('.modal').modal('close');
+        Materialize.toast('Invalid credentials', 4000 , 'red rounded') // 4000 is the duration of the toast
+        
+      }
 
-        if (!element.get('blockedbycontact') && element.get('blockedby')) {
-          element.set('blockedbycontact', guestname)
-          console.log('blockedby**' + guestname)
-          console.log('blockedbycontact**' + element.get('blockedbycontact'))
-          console.log('save these guys**')
-        }
 
-        // element.blockedby = guestname ;
-      });
-      // model.gifts.save()
     }
     , triggermodal() {
       $('#hrformsubmit').modal('open');
