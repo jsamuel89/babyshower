@@ -38,21 +38,23 @@
         {{#each model.qi.giftsByGroups as |group|}}
 
         <div class="col s12 m6 l4">
-          <div class="card-panel">
-            <h5 class="pink-text text-accent-3">
-              {{group.value}}
-            </h5>
-            {{#each group.items as |gift|}}
-            <p>
-              {{#if (lt gift.currentcount gift.maxcount)}} {{input type="checkbox" checked=gift.checked id=gift.name}}
-              <label for={{gift.name}}>{{gift.name}} {{#if (gt gift.currentcount 1)}} ({{dec gift.maxcount gift.currentcount}}) nos {{/if}}
-              </label>
-              {{else}} {{input type="checkbox" checked=gift.checked disabled='disabled' id=gift.name}}
-              <label class="pink-text" for={{gift.name}}>{{gift.name}}</label>
-              {{/if}}
-            </p>
+          <div class="card-panel" id="transparentbox">
+            <div id="nontransparent">
+              <h5 class="pink-text text-accent-3">
+                {{group.value}}
+              </h5>
+              {{#each group.items as |gift|}}
+              <p>
+                {{#if (lt gift.currentcount gift.maxcount)}} {{input type="checkbox" checked=gift.checked id=gift.name}}
+                <label id="bold" class="pink-text" for={{gift.name}}>{{gift.name}} {{#if (gt gift.currentcount 1)}} ({{dec gift.maxcount gift.currentcount}}) nos {{/if}}
+                </label>
+                {{else}} {{input type="checkbox" checked=gift.checked disabled='disabled' id=gift.name}}
+                <label class="black-text" for={{gift.name}}>{{gift.name}}</label>
+                {{/if}}
+              </p>
 
-            {{/each}}
+              {{/each}}
+            </div>
           </div>
         </div>
 

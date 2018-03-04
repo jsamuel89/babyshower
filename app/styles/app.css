@@ -17,3 +17,17 @@ body {
   border-radius: 5;
   padding:5px 0px 15px 0px;
 }
+#bold {
+  font-weight: bold;
+}
+#transparentbox {
+  background-color: #ffffff;
+  border: 1px solid black;
+  opacity: 0.8;
+  filter: alpha(opacity=60);
+}
+#nontransparent h5 {
+  margin: 5%;
+  font-weight: bold;
+  color: #000000;
+}
