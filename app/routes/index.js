@@ -109,7 +109,7 @@ export default Route.extend({
   , actions: {
     blockgifts(model, guestname, passcode) {
       // check passcode here
-      if(passcode === 'sahitya') {
+      if(passcode == 'sahitya') {
 
         var blocked = model.gifts
         
@@ -147,7 +147,7 @@ export default Route.extend({
 
     }
     , triggermodal() {
-      $('#hrformsubmit').modal('open');
+      $('#giftcheckout').modal('open');
     }
 
   }

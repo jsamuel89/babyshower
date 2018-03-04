@@ -12,12 +12,8 @@ body {
 
 }
 
-#giftchecklist {
-  width: 90%;
-  height: 100%;
+#giftcheckout {
+  width: 60%;
   border-radius: 5;
-}
-
-.padded{
-  padding:20px;
+  padding:5px 0px 15px 0px;
 }

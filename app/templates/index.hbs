@@ -14,7 +14,8 @@
 
 </script>
 
-<div class="row container">
+<div class="row">
+  {{!--
   <div class="col l6 m6 s12 left-align">
     <h3 class="pink-text">
       Welcome ..!!
@@ -24,65 +25,73 @@
     <h3 class="pink-text">
       <a class="waves-effect waves-light modal-trigger" href="#giftchecklist">Pick my gift</a>
     </h3>
-  </div>
+  </div> --}}
 
   <form autocomplete="off">
 
-    <div id="giftchecklist" class="modal pink accent-1">
-      <div class="modal-content white-text padded">
-        <h4 class="center-align black-text header">Gift Checklist</h4>
+    <div class="container">
+      <h4 class="center-align pink-text header">Baby Shower Gifts List</h4>
+      <p class="center-align black-text header">Please select any gift and click on checkout</p>
 
 
-        <div class="row">
-          {{#each model.qi.giftsByGroups as |group|}}
+      <div class="row">
+        {{#each model.qi.giftsByGroups as |group|}}
 
-          <div class="col s12 m6 l4">
-            <div class="card-panel white">
-              <h5 class="pink-text text-accent-3">
-                {{group.value}}
-              </h5>
-              {{#each group.items as |gift|}}
-              <p>
-                {{#if (lt gift.currentcount gift.maxcount)}}
-                  {{input type="checkbox" checked=gift.checked id=gift.name}}
-                  <label for={{gift.name}}>{{gift.name}} 
-                    {{#if (gt gift.currentcount 1)}} 
-                      ({{dec gift.maxcount gift.currentcount}}) nos
-                    {{/if}}
-                  </label>
-                {{else}}                  
-                  {{input type="checkbox" checked=gift.checked disabled='disabled' id=gift.name}}                  
-                  <label for={{gift.name}}>{{gift.name}}</label>
-                {{/if}}
-              </p>
+        <div class="col s12 m6 l4">
+          <div class="card-panel">
+            <h5 class="pink-text text-accent-3">
+              {{group.value}}
+            </h5>
+            {{#each group.items as |gift|}}
+            <p>
+              {{#if (lt gift.currentcount gift.maxcount)}} {{input type="checkbox" checked=gift.checked id=gift.name}}
+              <label for={{gift.name}}>{{gift.name}} {{#if (gt gift.currentcount 1)}} ({{dec gift.maxcount gift.currentcount}}) nos {{/if}}
+              </label>
+              {{else}} {{input type="checkbox" checked=gift.checked disabled='disabled' id=gift.name}}
+              <label class="pink-text" for={{gift.name}}>{{gift.name}}</label>
+              {{/if}}
+            </p>
 
-              {{/each}}
-            </div>
-          </div>
-
-          {{/each}}
-        </div>
-
-        <div class="row white">
-          <div class="input-field col s12 m5 l5">
-            {{input required='required' id="guest_name"  placeholder="Guest Name" value=guestname class="form-control validate black-text"}}
-            {{!-- <input type="text" id="guest_name" name="Guest Name" value={{model.guestname}} autocomplete="off"> --}}
-            <label for="guest_name" class="pink-text text-accent-3">Guest Name</label>
-          </div>
-          <div class="input-field col s6 m4 l5">
-            {{input type="password" required='required' id="password"  placeholder="Password" value=password class="form-control validate black-text"}}
-            {{!-- <input type="password" id="password" name="Pass key" value={{passcode}} autocomplete="off"> --}}
-            <label for="password" class="pink-text text-accent-3">Password</label>
-          </div>
-          <div class="input-field col s6 m2 l2">
-            <button class="btn waves-effect waves-light green" type="submit" {{action "blockgifts" model guestname passcode}}>Submit {{!--
-              <i class="material-icons right">send</i> --}}
-            </button>
+            {{/each}}
           </div>
         </div>
 
+        {{/each}}
       </div>
+
+      <div class="row">
+        <div {{action 'triggermodal'}}>
+          <button class="col s12 offset-m1 m10 offset-l1 l10 btn-large waves-effect waves-light pink modal-trigger" href="#giftcheckout"
+            type="submit">
+            <h5>Checkout</h5>
+          </button>
+        </div>
+      </div>
+
+
     </div>
   </form>
 
+</div>
+
+
+
+<div class="row white modal" id="giftcheckout">
+  <div class="modal-content">
+    <div class="input-field col s12">
+      {{input required='required' id="guest_name" placeholder="Guest Name" value=guestname class="form-control validate black-text"}}
+      {{!--
+      <input type="text" id="guest_name" name="Guest Name" value={{model.guestname}} autocomplete="off"> --}}
+      <label for="guest_name" class="pink-text text-accent-3">Guest Name</label>
+    </div>
+    <div class="input-field col s12">
+      {{input type="password" required='required' id="password" placeholder="Password" value=passcode class="form-control validate
+      black-text"}} {{!--
+      <input type="password" id="password" name="Pass key" value={{passcode}} autocomplete="off"> --}}
+      <label for="password" class="pink-text text-accent-3">Password</label>
+    </div>
+      <button class="col s12 btn waves-effect waves-light green" type="submit" {{action "blockgifts" model guestname passcode}}>Submit {{!--
+        <i class="material-icons right">send</i> --}}
+      </button>
+  </div>
 </div>
