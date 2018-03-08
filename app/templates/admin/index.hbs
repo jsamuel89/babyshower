@@ -1,33 +1,66 @@
 {{outlet}}
+<style>
+  body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    background: pink;
+    background-position: 50% 50%;
+    /* Sets reference point to scale from */
+    background-size: cover;
 
-        <div class="row">
-          {{#each model.qi.giftsByGroups as |group|}}
+  }
+  .open {
+    color : red;
+  }
 
-          <div class="col s12 m6 l4">
-            <div class="card-panel white">
-              <h5 class="pink-text text-accent-3">
-                {{group.value}}
-              </h5>
-              {{#each group.items as |gift|}}
+  .closed {
+    color : green;
+  }
+</style>
+<div class="row">
+  {{#each model.qi.giftsByGroups as |group|}}
+    {{#if group.value}}
+      <div class="col s12 m6 l4">
+        <div class="card-panel white">
+          <h5 class="pink-text text-accent-3">
+            {{group.value}}
+          </h5>
+          {{#each group.items as |gift|}}
 
-              <h5>{{gift.name}} - {{if gift.blockedbycontact gift.blockedbycontact 'open'}}</h5>
-              {{!-- <p>
-                {{input type="checkbox" checked=gift.blockedby disabled=gift.blockedbycontact id=gift.name}}
-                <label for={{gift.name}}>{{gift.name}}</label>
-              </p> --}}
-
-              {{/each}}
-            </div>
-          </div>
-
-          {{/each}}
+          <p class={{if gift.blockedbycontact 'closed' 'open'}}>{{gift.name}} - {{if gift.blockedbycontact gift.blockedbycontact 'open'}}</p>
+          {{!--
+          <p>
+            {{input type="checkbox" checked=gift.blockedby disabled=gift.blockedbycontact id=gift.name}}
+            <label for={{gift.name}}>{{gift.name}}</label>
+          </p> --}} {{/each}}
         </div>
+      </div>
+    {{/if}}
+  {{/each}}
+</div>
+
+<div class="row white">
+  <div class="input-field col s12 m6 l3 offset-l1">
+    {{input type="text" id="giftname" value=model.newgift.name  }}
+    <label for="giftname" class="pink-text text-accent-3">Gift Name</label>
+
+  </div>
+
+  <div class="input-field col s12 m6 l3">
+    {{input type="text" id="gifttype" value=model.newgift.type  }}
+    <label for="gifttype" class="pink-text text-accent-3">Gift Type</label>
+  </div>
+
+  <div class="input-field col s12 m6 l2">
+    <label for="maxgift" class="pink-text text-accent-3 active">Maximum Count to allow </label>
+    {{input type="number" id="maxgift" value=model.newgift.maxcount placeholder="" }}
+  </div>
+
+  <div class="input-field col s12 m6 l1">
+    <button {{action "addnewgift" model.newgift}} class="btn btn-sm btn-primary pink">Save</button>
+  </div>
+
+</div>
 
 
- Create a form here to create a new gift item
-
- {{input type="text" value=model.newgift.name placeholder="Name of the gift item" }}
- {{input type="text" value=model.newgift.type placeholder="Gift type" }}
- {{input type="number" value=model.newgift.maxcount placeholder="Maximum Count to allow" }}
-
-  <button {{action "addnewgift" model.newgift}} class="btn btn-sm btn-primary">Save</button>
