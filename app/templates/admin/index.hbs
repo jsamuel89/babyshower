@@ -10,45 +10,46 @@
     background-size: cover;
 
   }
+
   .open {
-    color : red;
+    color: red;
   }
 
   .closed {
-    color : green;
+    color: green;
   }
 </style>
-<div class="row">
-  {{#each model.qi.giftsByGroups as |group|}}
-    {{#if group.value}}
-      <div class="col s12 m6 l4">
-        <div class="card-panel white">
-          <h5 class="pink-text text-accent-3">
-            {{group.value}}
-          </h5>
-          {{#each group.items as |gift|}}
 
-          <p class={{if gift.blockedbycontact 'closed' 'open'}}>{{gift.name}} - {{if gift.blockedbycontact gift.blockedbycontact 'open'}}</p>
-          {{!--
-          <p>
-            {{input type="checkbox" checked=gift.blockedby disabled=gift.blockedbycontact id=gift.name}}
-            <label for={{gift.name}}>{{gift.name}}</label>
-          </p> --}} {{/each}}
-        </div>
-      </div>
-    {{/if}}
-  {{/each}}
+{{#if model.isValidated}}
+<div class="row">
+  {{#each model.qi.giftsByGroups as |group|}} {{#if group.value}}
+  <div class="col s12 m6 l4">
+    <div class="card-panel white">
+      <h5 class="pink-text text-accent-3">
+        {{group.value}}
+      </h5>
+      {{#each group.items as |gift|}}
+
+      <p class={{if gift.blockedbycontact 'closed' 'open'}}>{{gift.name}} - {{if gift.blockedbycontact gift.blockedbycontact 'open'}}</p>
+      {{!--
+      <p>
+        {{input type="checkbox" checked=gift.blockedby disabled=gift.blockedbycontact id=gift.name}}
+        <label for={{gift.name}}>{{gift.name}}</label>
+      </p> --}} {{/each}}
+    </div>
+  </div>
+  {{/if}} {{/each}}
 </div>
 
 <div class="row white">
   <div class="input-field col s12 m6 l3 offset-l1">
-    {{input type="text" id="giftname" value=model.newgift.name  }}
+    {{input type="text" id="giftname" value=model.newgift.name }}
     <label for="giftname" class="pink-text text-accent-3">Gift Name</label>
 
   </div>
 
   <div class="input-field col s12 m6 l3">
-    {{input type="text" id="gifttype" value=model.newgift.type  }}
+    {{input type="text" id="gifttype" value=model.newgift.type }}
     <label for="gifttype" class="pink-text text-accent-3">Gift Type</label>
   </div>
 
@@ -62,5 +63,27 @@
   </div>
 
 </div>
-
-
+{{else}}
+<div class="row card-large">
+  <div class="col s12 m8 offset-m2 l6 offset-l3">
+    <div class="card-panel">
+      <h5 class="pink-text text-accent-3 center-align"> Login </h5>
+      <div class="input-field">
+        {{input required='required' id="user_name" placeholder="User Name" value=username class="form-control validate black-text"}}
+        {{!--
+        <input type="text" id="user_name" name="user Name" value={{model.username}} autocomplete="off"> --}}
+        <label for="user_name" class="pink-text text-accent-3">User Name</label>
+      </div>
+      <div class="input-field">
+        {{input type="password" required='required' id="password" placeholder="Password" value=passcode class="form-control validate
+        black-text"}} {{!--
+        <input type="password" id="password" name="Pass key" value={{passcode}} autocomplete="off"> --}}
+        <label for="password" class="pink-text text-accent-3">Password</label>
+      </div>
+      <button class="btn waves-effect waves-light green" type="submit" {{action "authenticate" username passcode}}>Submit {{!--
+        <i class="material-icons right">send</i> --}}
+      </button>
+    </div>
+  </div>
+</div>
+{{/if}}
