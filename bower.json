@@ -1,0 +1,8 @@
+{
+  "name": "babyshowerfront",
+  "dependencies": {
+    "materialize": "0.100.2",
+    "masonry": "^4.2.1",
+    "imagesloaded": "^4.1.4"
+  }
+}

@@ -13,19 +13,40 @@
   });
 
 </script>
+<style>
 
+  /*###Desktops, big landscape tablets and laptops(Large, Extra large)####*/
+@media screen and (min-width: 715px){
+    .masonry-item {
+    width: 25% !important;
+    padding: 10px;
+  }
+}
+
+/*###Tablet(medium)###*/
+@media screen and (min-width : 451px) and (max-width : 715px){
+  .masonry-item {
+    width: 50% !important;
+    padding: 10px;
+  }
+}
+
+/*### Smartphones (portrait and landscape)(small)### */
+@media screen and (min-width : 0px) and (max-width : 450px){
+  .masonry-item {
+    width: 98% !important;
+    padding: 10px;
+  }
+}
+
+.container {
+  width:85%
+}
+.card-panel {
+  padding: 12px;
+}
+</style>
 <div class="row">
-  {{!--
-  <div class="col l6 m6 s12 left-align">
-    <h3 class="pink-text">
-      Welcome ..!!
-    </h3>
-  </div>
-  <div class="col l6 m6 s12 left-align" {{action 'triggermodal'}}>
-    <h3 class="pink-text">
-      <a class="waves-effect waves-light modal-trigger" href="#giftchecklist">Pick my gift</a>
-    </h3>
-  </div> --}}
 
   <form autocomplete="off">
 
@@ -34,7 +55,7 @@
       <p class="center-align black-text header">Please select any gift and click on checkout</p>
 
 
-      <div class="row">
+      {{!-- <div class="row">
         {{#each model.qi.giftsByGroups as |group|}}
 
         <div class="col s12 m6 l4">
@@ -59,7 +80,30 @@
         </div>
 
         {{/each}}
-      </div>
+      </div> --}}
+
+      {{#masonry-grid items=model.qi.giftsByGroups as |group|}}
+        <div class="grid-item center">
+          <div class="card-panel" id="transparentbox">
+            <div id="nontransparent">
+              
+              <h5>{{group.value}}</h5>
+              {{#each group.items as |gift|}}
+                <p>
+                  {{#if (lt gift.currentcount gift.maxcount)}} {{input type="checkbox" checked=gift.checked id=gift.name}}
+                  <label id="bold" class="pink-text" for={{gift.name}}>{{gift.name}} {{#if (gt gift.currentcount 1)}} ({{dec gift.maxcount gift.currentcount}}) nos {{/if}}
+                  </label>
+                  {{else}} {{input type="checkbox" checked=gift.checked disabled='disabled' id=gift.name}}
+                  <label class="black-text" for={{gift.name}}>{{gift.name}}</label>
+                  {{/if}}
+                </p>
+
+              {{/each}}
+            </div>
+          </div>  
+        </div>
+      {{/masonry-grid}}
+
 
       <div class="row">
         <div {{action 'triggermodal'}}>

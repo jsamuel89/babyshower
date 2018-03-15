@@ -51,10 +51,9 @@ export default Route.extend({
     
     , authenticate (username,password) {
       var modelObject = this.modelFor(this.routeName);
-      if(username === '1' && password === '1') { 
+      if(username === 'admin' && password === '$@hitya') { 
         Ember.set(modelObject, "isValidated", true);
         Materialize.toast('Login success', 4000 , 'green rounded') // 4000 is the duration of the toast
-
       } else {
         Materialize.toast('Invalid credentials', 4000 , 'red rounded') // 4000 is the duration of the toast
       }

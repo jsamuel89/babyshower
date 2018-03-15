@@ -36,6 +36,7 @@
     "ember-functional-helpers": "^0.7.0",
     "ember-group-by": "0.0.5",
     "ember-load-initializers": "^1.0.0",
+    "ember-masonry-grid": "git://github.com/jsamuel89/ember-masonry-grid.git",
     "ember-resolver": "^4.0.0",
     "ember-source": "~2.18.0",
     "ember-welcome-page": "^3.0.0",
